@@ -1,4 +1,4 @@
-# Configure_Services
+# Linux_network_sharing_automation
 
 Automated setup of **Samba, NFS, and FTP servers** on Debian/RHEL systems using Bash.
 
