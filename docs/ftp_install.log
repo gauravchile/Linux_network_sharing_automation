@@ -1,0 +1,22 @@
+[*] Installing FTP (vsftpd)...
+Get:1 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+Hit:2 http://archive.ubuntu.com/ubuntu noble InRelease
+Hit:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease
+Hit:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease
+Get:5 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1198 kB]
+Get:6 http://security.ubuntu.com/ubuntu noble-security/main Translation-en [201 kB]
+Get:7 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [881 kB]
+Get:8 http://security.ubuntu.com/ubuntu noble-security/universe Translation-en [196 kB]
+Get:9 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [1933 kB]
+Get:10 http://security.ubuntu.com/ubuntu noble-security/restricted Translation-en [438 kB]
+Get:11 http://security.ubuntu.com/ubuntu noble-security/multiverse Translation-en [5844 B]
+Fetched 4980 kB in 29s (174 kB/s)
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+vsftpd is already the newest version (3.0.5-0ubuntu3.1).
+0 upgraded, 0 newly installed, 0 to remove and 50 not upgraded.
+Synchronizing state of vsftpd.service with SysV service script with /usr/lib/systemd/systemd-sysv-install.
+Executing: /usr/lib/systemd/systemd-sysv-install enable vsftpd
+[+] FTP configured successfully!

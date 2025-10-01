@@ -1,0 +1,29 @@
+[*] Installing client tools...
+===== Testing Samba =====
+
+	Sharename       Type      Comment
+	---------       ----      -------
+	print$          Disk      Printer Drivers
+	PublicShare     Disk      
+	IPC$            IPC       IPC Service (samba-server server (Samba, Ubuntu))
+SMB1 disabled -- no workgroup available
+  .                                   D        0  Wed Oct  1 19:21:22 2025
+  ..                                  D        0  Wed Oct  1 19:21:22 2025
+  testfile.txt                        N        0  Wed Oct  1 19:11:56 2025
+  test_file.txt                       A       18  Wed Oct  1 20:03:17 2025
+
+		9065864 blocks of size 1024. 6935820 blocks available
+===== Testing NFS =====
+[+] Mounted NFS share!
+===== Testing FTP =====
+Connected to 10.192.225.98.
+220 (vsFTPd 3.0.5)
+331 Please specify the password.
+230 Login successful.
+Remote system type is UNIX.
+Using binary mode to transfer files.
+229 Entering Extended Passive Mode (|||18813|)
+150 Here comes the directory listing.
+226 Directory send OK.
+221 Goodbye.
+[+] All tests completed!
