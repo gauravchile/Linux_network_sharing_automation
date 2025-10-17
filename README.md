@@ -23,34 +23,42 @@ Simplifies network file sharing setup and testing across Linux servers.
 
 ```bash
 sudo ./install_services.sh <samba|nfs|ftp>
-Client Testing
-bash
-Copy code
-sudo ./client_test.sh <SAMBA_IP> <NFS_IP> <FTP_IP>
-💡 Tip: Replace <SAMBA_IP>, <NFS_IP>, and <FTP_IP> with the respective server IP addresses.
+```
 
-📁 Folder Structure
-bash
-Copy code
+### Client Testing
+
+```bash
+sudo ./client_test.sh <SAMBA_IP> <NFS_IP> <FTP_IP>
+```
+
+> 💡 Tip: Replace `<SAMBA_IP>`, `<NFS_IP>`, and `<FTP_IP>` with the respective server IP addresses.
+
+---
+
+## 📁 Folder Structure
+
+```
 Linux_network_sharing_automation/
 │
 ├─ configs/   # Configuration files for Samba, NFS, FTP
 ├─ docs/      # Screenshots, logs, and documentation
 ├─ install_services.sh   # Main installation script
 └─ client_test.sh        # Client testing script
+```
+
+---
 
 ## 🎯 Skills Demonstrated
-Linux server administration
 
-Network file sharing with Samba, NFS, FTP
+- Linux server administration  
+- Network file sharing with **Samba, NFS, FTP**  
+- Bash scripting for automation  
+- Client-server testing and validation  
 
-Bash scripting for automation
-
-Client-server testing and validation
+---
 
 ## 💡 Pro Tips
-Use for small office or lab environments
 
-Extend to include user authentication and permissions
-
-Check logs in docs/ for troubleshooting
+- Use for **small office or lab environments**  
+- Extend to include **user authentication and permissions**  
+- Check logs in `docs/` for troubleshooting
