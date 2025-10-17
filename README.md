@@ -38,7 +38,8 @@ Linux_network_sharing_automation/
 ├─ docs/      # Screenshots, logs, and documentation
 ├─ install_services.sh   # Main installation script
 └─ client_test.sh        # Client testing script
-🎯 Skills Demonstrated
+
+## 🎯 Skills Demonstrated
 Linux server administration
 
 Network file sharing with Samba, NFS, FTP
@@ -47,7 +48,7 @@ Bash scripting for automation
 
 Client-server testing and validation
 
-💡 Pro Tips
+## 💡 Pro Tips
 Use for small office or lab environments
 
 Extend to include user authentication and permissions
