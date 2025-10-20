@@ -2,6 +2,7 @@
 # ========================================
 # install_services.sh
 # Auto setup Samba, NFS, or FTP on Debian/RHEL
+# Shows spinner + percentage while installing/updating
 # Usage: sudo ./install_services.sh <role>
 # Roles: samba | nfs | ftp
 # ========================================
@@ -11,12 +12,12 @@ set -euo pipefail
 # Detect distro
 if [ -f /etc/debian_version ]; then
     DISTRO="debian"
-    PKG_INSTALL="apt-get install -y"
-    UPDATE_CMD="apt-get update -y"
+    PKG_INSTALL="apt-get install -y -qq"
+    UPDATE_CMD="apt-get update -y -qq"
 elif [ -f /etc/redhat-release ]; then
     DISTRO="rhel"
-    PKG_INSTALL="yum install -y"
-    UPDATE_CMD="yum makecache"
+    PKG_INSTALL="yum install -y -q"
+    UPDATE_CMD="yum makecache -q"
 else
     echo "Unsupported OS"
     exit 1
@@ -33,10 +34,45 @@ if [ -z "$ROLE" ]; then
     done
 fi
 
+# Spinner function
+spinner() {
+    local pid=$1
+    local task="$2"
+    local spin='⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏'
+    local i=0
+    local percent=0
+
+    while kill -0 "$pid" 2>/dev/null; do
+        i=$(( (i+1) % 10 ))
+        percent=$((percent+1))
+        [[ $percent -gt 99 ]] && percent=99
+        printf "\r%s  %s... %d%%" "${spin:i:1}" "$task" "$percent"
+        sleep 0.1
+    done
+    printf "\r✅  %s... 100%%\n" "$task"
+}
+
+update_system() {
+    local task="Updating package index"
+    if [ "$DISTRO" = "debian" ]; then
+        $UPDATE_CMD &
+    else
+        $UPDATE_CMD &
+    fi
+    spinner $! "$task"
+}
+
+install_pkg() {
+    local pkg="$1"
+    local task="Installing $pkg"
+    $PKG_INSTALL "$pkg" &
+    spinner $! "$task"
+}
+
 install_samba() {
-    echo "[*] Installing Samba..."
-    $UPDATE_CMD
-    $PKG_INSTALL samba
+    update_system
+    install_pkg "samba"
+
     mkdir -p /srv/samba/share
     chown nobody:nogroup /srv/samba/share || chown nobody:nobody /srv/samba/share
     chmod 0777 /srv/samba/share
@@ -56,12 +92,11 @@ EOF
 }
 
 install_nfs() {
-    echo "[*] Installing NFS..."
-    $UPDATE_CMD
+    update_system
     if [ "$DISTRO" = "debian" ]; then
-        $PKG_INSTALL nfs-kernel-server
+        install_pkg "nfs-kernel-server"
     else
-        $PKG_INSTALL nfs-utils
+        install_pkg "nfs-utils"
     fi
 
     mkdir -p /srv/nfs/share
@@ -77,9 +112,8 @@ install_nfs() {
 }
 
 install_ftp() {
-    echo "[*] Installing FTP (vsftpd)..."
-    $UPDATE_CMD
-    $PKG_INSTALL vsftpd
+    update_system
+    install_pkg "vsftpd"
 
     cp /etc/vsftpd.conf /etc/vsftpd.conf.bak
     cat > /etc/vsftpd.conf <<EOF
@@ -103,4 +137,3 @@ case "$ROLE" in
     ftp)   install_ftp ;;
     *)     echo "Invalid role: $ROLE (use samba|nfs|ftp)" ;;
 esac
-
